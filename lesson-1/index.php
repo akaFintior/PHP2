@@ -19,10 +19,12 @@ class Guest
 class Member extends Guest
 {
     private $regDate;
+    private $email;
     
-    public function __construct($name = null, $date = null, $regDate = null){
+    public function __construct($name = null, $date = null, $regDate = null, $email = null){
         parent::__construct($name, $date);
         $this->regDate;
+        $this->email;
     }
     public function setName($name){
         $this->name = $name;
@@ -30,10 +32,13 @@ class Member extends Guest
     public function setRegDate($regDate){
         $this->regDate = $regDate;
     }
+    public function setEmail($email){
+        $this->email = $email;
+    }
 
     public function leaveMessage($text) {
         parent::leaveMessage($text);
-        echo "<p>Registered: {$this->regDate}</p>";
+        echo "<p>Registered: {$this->regDate}</p><hr><h6>{$this->email}</h6>";
     }
 }
 
@@ -41,9 +46,15 @@ $guest = new Guest("Guest");
 
 $guest->leaveMessage("Hello!");
 
-$member = new Member("member");
-$member->setName("John");
-$member->setRegDate("2001-2-3");
+$member = new Member("John");
+$member->setRegDate("2011-2-3");
+$member->setEmail("any@mail.com");
 
 $member->leaveMessage("Hello World!");
-// var_dump($guest);
+
+$member = new Member("Member");
+$member->setName("Michle");
+$member->setRegDate("2015-2-8");
+$member->setEmail("new@mail.com");
+
+$member->leaveMessage("Test");
