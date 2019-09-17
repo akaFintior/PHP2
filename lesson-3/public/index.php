@@ -10,13 +10,21 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 
 
 
-$product = new Product();
-$product->insert();
-var_dump($product->getOne(1));
+
+// $test = new User();
+// $test->login = 'test';
+// $test->pass = '123';
+// var_dump($test);
+// $test->insert();
 
 
+// $product = new Product();
+// $product->name = 'mouse';
+// $product->description = 'pc accesories';
+// $product->price = 50;
+// var_dump($product);
+// $product->insert();
 
+// var_dump($product->getOne(1));
 
-
-var_dump($product);
 

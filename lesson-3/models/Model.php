@@ -14,14 +14,21 @@ abstract class Model implements IModel
         $this->db = Db::getInstance();
     }
 
-    public function insert() {
-        foreach ($this as $key => $value)
-            var_dump($key);
-        die();
-        $sql = "INSERT INTO ()...";
+    
 
-        $this->db->execute($sql);
-       // $this->id = lastinsertId;
+    public function insert() {
+        $tableName = $this->getTableName();
+        foreach ($this as $key => $value) {
+            if ($key !== 'id' && $key !== 'db') {
+                $params["$key"] = $value;
+                $keys[] = $key;
+            }
+        }
+        $keysString = implode(", ",$keys);  //login, pass
+        $valuesString = implode(", :",$keys);   //placeholders - login, :pass
+        $sql = "INSERT INTO {$tableName} ({$keysString}) VALUES (:{$valuesString});";
+        // var_dump($sql, $params);
+        $this->db->execute($sql, $params);
     }
 
     public function delete() {
