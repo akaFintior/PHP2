@@ -39,6 +39,11 @@ class Db
             $this->config['charset']
         );
     }
+    public function getLastId()
+    {
+        return $this->getConnection()->lastInsertId();
+    }
+
 //SELECT * FROM product WHERE id = $id $params = ['id' => 1]
     private function query($sql, $params) {
         $pdoStatement = $this->getConnection()->prepare($sql);
@@ -52,7 +57,7 @@ class Db
     }
 
     public function queryOne($sql, $params = []) {
-        return $this->queryAll($sql, $params)[0];
+        return $this->query($sql, $params)->fetchObject(__CLASS__);
     }
 
     public function queryAll($sql, $params = []) {
