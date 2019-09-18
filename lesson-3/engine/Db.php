@@ -57,7 +57,7 @@ class Db
     }
 
     public function queryOne($sql, $params = []) {
-        return $this->query($sql, $params)->fetchObject(__CLASS__);
+        return $this->query($sql, $params)->fetchObject();
     }
 
     public function queryAll($sql, $params = []) {

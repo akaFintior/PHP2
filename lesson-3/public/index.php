@@ -11,16 +11,19 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 
 
 
-$test = new User('test', '123');
-$test->insert();
-$test->update('newName', '123');
+// $test = new User('test', '123');
 
+// $test->insert();
+// $test->update(['newName', '123']);
 // $test->delete(3);
 
+
 // $product = new Product("Keyboard", "pc accesories", 30);
-// var_dump($product);
 
 // $product->insert();
-// $product->delete();
-// var_dump($product->getOne(1));
-// $product->update("Keyboard", "pc accesories", 25, 12);
+// $product->update(["Keyboard", "pc accesories", 20, 12]);
+// $product->delete(15);
+
+
+// var_dump($product->getOne(3));
+// var_dump($test->getAll());

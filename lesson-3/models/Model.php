@@ -28,7 +28,6 @@ abstract class Model implements IModel
         $keysString = implode(", ",$keys);  //      simple string -   login, pass
         $valuesString = implode(", :",$keys);   //  placeholders -    login, :pass
         $sql = "INSERT INTO {$tableName} ({$keysString}) VALUES (:{$valuesString});";
-        // var_dump($sql, $params);
         $this->db->execute($sql, $params);
     }
 
@@ -42,7 +41,27 @@ abstract class Model implements IModel
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         $this->db->execute($sql, ['id' => $id]);
     }
-    
+    public function update($newValues = [])     // new values come in array
+    {
+        $tableName = $this->getTableName();
+        $setString = '';
+        foreach ($this as $key => $value) {
+            if ($key !== 'id' && $key !== 'db') {
+            $keys[] = $key . "=:" . $key;       // format keys:  keyName=:keyName
+            $allKeys[] = $key;
+            }
+        }
+        $allKeys[] = 'id';                  // params['id'] has to be at last position
+        for ($i=0; $i<count($newValues); $i++) {
+            $params["$allKeys[$i]"] = $newValues[$i]; 
+        }
+        $setString = implode(", ", $keys);      // sql string after SET
+        if (empty($params['id'])) {
+            $params['id'] = $this->db->getLastId();
+        }
+        $sql = "UPDATE {$tableName} SET {$setString} WHERE id = :id";
+        $this->db->execute($sql, $params);
+    }
 
     public function getOne($id) {
         $tableName = $this->getTableName();

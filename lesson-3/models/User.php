@@ -19,15 +19,5 @@ class User extends Model
         return 'users';
     }
 
-    public function update($login, $pass, $id = null) 
-    {
-        if (is_null($id)) {
-            $id = $this->db->getLastId();
-            var_dump($id);
-        }
-        $tableName = $this->getTableName();
-        $sql = "UPDATE {$tableName} SET login = :login, pass = :pass WHERE id = :id";
-        $this->db->execute($sql, ['login' => $login, 'pass' => $pass, 'id' => $id]);
-    }
 
 }

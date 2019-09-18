@@ -21,14 +21,5 @@ class Basket extends Model
         return 'basket';
     }
 
-    public function update($session_id, $product_id, $id = null) 
-    {
-        if (is_null($id)) {
-            $id = $this->db->getLastId();
-            var_dump($id);
-        }
-        $tableName = $this->getTableName();
-        $sql = "UPDATE {$tableName} SET session_id = :session_id, product_id = :product_id WHERE id = :id";
-        $this->db->execute($sql, ['session_id' => $session_id, 'product_id' => $product_id, 'id' => $id]);
-    }
+
 }
