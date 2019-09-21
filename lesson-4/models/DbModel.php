@@ -24,7 +24,7 @@ abstract class DbModel extends Models
         $tableName = static::getTableName();
         //TODO переделать цикл по state чтобы избавиться от условия
         foreach ($this as $key => $value) {
-            if ($key === "id") continue;
+            if ($key === "id" || $key === "state") continue;
             $params[":{$key}"] = $value;
             $columns[] = "`$key`";
         }
@@ -45,7 +45,23 @@ abstract class DbModel extends Models
         return Db::getInstance()->execute($sql, ['id' => $this->id]);
     }
     public function update() {
-        //TODO реализовать умный update (цикл по state)
+        $tableName = static::getTableName();
+        $setString = '';
+        foreach ($this as $key => $value) {
+            if ($key !== 'id' && $key !== 'state' && $this->state["$key"]) {
+            $keys[] = $key . "=:" . $key;       // format keys:  keyName=:keyName
+            $allKeys[] = $key;
+            }
+        }
+        
+        for ($i=0; $i<count($allKeys); $i++) {
+            $changedValue = $allKeys[$i];
+            $params["$allKeys[$i]"] = $this->getValue($changedValue);
+        }
+        $setString = implode(", ", $keys);      // sql string after SET
+        $params['id'] = $this->id;
+        $sql = "UPDATE {$tableName} SET {$setString} WHERE id = :id";
+        Db::getInstance()->execute($sql, $params);
     }
 
     public function save() {

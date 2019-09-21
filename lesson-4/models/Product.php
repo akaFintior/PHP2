@@ -19,13 +19,25 @@ class Product extends DbModel
         $this->name = $name;
         $this->state['name'] = true;
     }
-
+    
+    public function getValue($valueOf)
+    {
+        switch ($valueOf) {
+            case 'name':
+                return $this->name;
+            case 'description':
+                return $this->description;
+            case 'price':
+                return $this->price;
+        }
+    }
     /**
      * @param null $description
      */
     public function setDescription($description): void
     {
         $this->description = $description;
+        $this->state['description'] = true;
     }
 
     /**
@@ -34,6 +46,7 @@ class Product extends DbModel
     public function setPrice($price): void
     {
         $this->price = $price;
+        $this->state['price'] = true;
     }
 
 

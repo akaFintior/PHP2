@@ -11,10 +11,6 @@ class ProductController extends Controller
         echo $this->render('index');
     }
 
-    public function actionCatalog() {
-        $catalog = Product::getAll();
-        echo $this->render('catalog', ['catalog' => $catalog]);
-    }
 
     public function actionCard() {
         $id = $_GET['id'];
@@ -23,5 +19,9 @@ class ProductController extends Controller
     }
 
 
+    public function actionCatalog() {
+        $catalog = Product::getAll();
+        echo $this->render('catalog', ['catalog' => $catalog]);
+    }
 
 }

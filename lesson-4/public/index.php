@@ -26,16 +26,18 @@ if (class_exists($controllerClass)) {
  * @var Product $product
  */
 
-//$product = new Product("Сникерс", "Вкусный", 12);
+// $product = new Product("Сникерс", "Вкусный", 12);
 //$product->save();
 //$product->delete();
 
-$product = Product::getOne(3);
+// $product = Product::getOne(3);
 
-//$product->setName("Сникерс2");
+// $product->setName("Шоколад2");
+// $product->setDescription("Горький");
+// $product->setPrice(40);
+// var_dump(($product));
+// $product->save();
 
-//$product->save();
 
-//var_dump(($product));
 //var_dump(get_class_methods($product));
 

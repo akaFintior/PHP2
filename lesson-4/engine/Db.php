@@ -9,8 +9,8 @@ class Db
     private $config = [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'login' => 'root',
-        'password' => '',
+        'login' => 'shop',
+        'password' => '123456',
         'database' => 'shop',
         'charset' => 'utf8'
     ];

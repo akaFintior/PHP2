@@ -16,6 +16,7 @@ abstract class Controller
         if (method_exists($this, $method)) {
             $this->$method();
         } else {
+            var_dump($method);
             echo "404";
         }
     }
