@@ -2,22 +2,27 @@
 use app\models\{Basket, Product, User};
 use app\engine\Db;
 
+session_start();
+
 include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/../engine/Autoload.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$controllerName = $_GET['c'] ?: 'product';
-$actionName = $_GET['a'];
+var_dump(session_id());
+die();
 
-$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName)  . "Controller";
+// $controllerName = $_GET['c'] ?: 'product';
+// $actionName = $_GET['a'];
 
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
-    $controller->runAction($actionName);
-} else {
-    echo "Не правильный контроллер";
-}
+// $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName)  . "Controller";
+
+// if (class_exists($controllerClass)) {
+//     $controller = new $controllerClass();
+//     $controller->runAction($actionName);
+// } else {
+//     echo "Не правильный контроллер";
+// }
 
 
 
