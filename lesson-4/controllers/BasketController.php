@@ -2,15 +2,18 @@
 
 namespace app\controllers;
 
-use app\models\Product;
+use app\models\Basket;
 
 class BasketController extends Controller
 {
 
+    public function actionIndex() {
+        echo $this->render('index');
+    }
 
-    public function actionBasket() {
-        $catalog = Product::getAll();
-        echo $this->render('catalog', ['catalog' => $catalog]);
+    public function actionCatalog() {
+        $basket = Basket::getAll();
+        echo $this->render('basket', ['basket' => $basket]);
     }
 
 }

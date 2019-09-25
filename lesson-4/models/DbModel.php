@@ -10,9 +10,6 @@ use app\engine\Db;
 
 abstract class DbModel extends Models
 {
-    public function getLimit($from, $to) {
-
-    }
 
     public function getWere($name, $value) {
 
@@ -82,6 +79,12 @@ abstract class DbModel extends Models
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
         return Db::getInstance()->queryAll($sql);
+    }
+
+    public static function getLimit($limit){
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE 1 LIMIT ?";
+        return Db::getInstance()->executeLimit($sql, $limit);
     }
 
 }

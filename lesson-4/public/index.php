@@ -9,20 +9,19 @@ include $_SERVER['DOCUMENT_ROOT'] . "/../engine/Autoload.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-var_dump(session_id());
-die();
 
-// $controllerName = $_GET['c'] ?: 'product';
-// $actionName = $_GET['a'];
 
-// $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName)  . "Controller";
+$controllerName = $_GET['c'] ?: 'product';
+$actionName = $_GET['a'];
 
-// if (class_exists($controllerClass)) {
-//     $controller = new $controllerClass();
-//     $controller->runAction($actionName);
-// } else {
-//     echo "Не правильный контроллер";
-// }
+$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName)  . "Controller";
+
+if (class_exists($controllerClass)) {
+    $controller = new $controllerClass();
+    $controller->runAction($actionName);
+} else {
+    echo "Не правильный контроллер";
+}
 
 
 

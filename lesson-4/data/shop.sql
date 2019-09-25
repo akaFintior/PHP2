@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июн 01 2019 г., 14:07
--- Версия сервера: 5.7.23
--- Версия PHP: 7.1.22
+-- Host: localhost
+-- Generation Time: Sep 25, 2019 at 08:31 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `shop`
+-- Database: `shop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `basket`
+-- Table structure for table `basket`
 --
 
 CREATE TABLE `basket` (
@@ -35,7 +35,7 @@ CREATE TABLE `basket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `basket`
+-- Dumping data for table `basket`
 --
 
 INSERT INTO `basket` (`id`, `session_id`, `product_id`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `basket` (`id`, `session_id`, `product_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -56,19 +56,24 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
 (1, 'Пицца', 'Новое описание 2', 55),
 (2, 'Пончик', 'Сладкий, с шоколадом.', 12),
-(3, 'Шоколад', 'Белый', 12),
-(4, 'Сникерс', 'Заморский', 25);
+(3, 'Шоколад2', 'Горький', 40),
+(4, 'Сникерс', 'Заморский', 25),
+(5, 'laptop', 'portable pc', 200),
+(6, 'mouse', 'pc accesories', 50),
+(7, 'Speakers', 'pc accesories', 100),
+(12, 'Keyboard', 'pc accesories', 20),
+(16, 'Сникерс', 'Вкусный', 12);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -78,56 +83,57 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`) VALUES
 (1, 'admin', '123'),
-(2, 'user', '123');
+(2, 'user', '123'),
+(22, 'newName', '123');
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `basket`
+-- Indexes for table `basket`
 --
 ALTER TABLE `basket`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `basket`
+-- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
--- AUTO_INCREMENT для таблицы `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

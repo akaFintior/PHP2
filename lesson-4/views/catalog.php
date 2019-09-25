@@ -10,3 +10,5 @@
 </div>
 <? endforeach; ?>
 </div>
+
+<p><a href="?c=product&a=catalog&page=<?=$page?>">Показать ещё</a></p>
