@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product</title>
+    </head>
+    <body>
+        {% for item in menu %}
+        <a href="{{ item.src}}">{{ item.name }}</a>
+        {% endfor %}
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }}</p>
+    </body>
+</html>

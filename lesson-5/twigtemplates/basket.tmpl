@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basket</title>
+    </head>
+    <body>
+        {% for item in menu %}
+            <a href="{{ item.src}}">{{ item.name }}</a>
+        {% endfor %}
+        <h2>Корзина</h2>
+        {% if basket|length %}
+            {% for item in basket %}
+                <a href="/?c=product&a=card&id={{ item.id }}"><h3>{{ item.name }}</h3></a>
+                <p>Цена: {{ item.price }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Basket is empty! </p>
+        {% endif %}
+    </body>
+</html>

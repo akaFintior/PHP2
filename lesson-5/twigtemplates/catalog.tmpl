@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Catalog</title>
+    </head>
+    <body>
+        {% for item in menu %}
+        <a href="{{ item.src}}">{{ item.name }}</a>
+        {% endfor %}
+        <h2>Каталог</h2>
+        {% for item in catalog %}
+            <a href="/?c=product&a=card&id={{ item.id }}"><h3>{{ item.name }}</h3></a>
+            <p>Цена: {{ item.price }}</p>
+        {% endfor %}
+    </body>
+</html>
