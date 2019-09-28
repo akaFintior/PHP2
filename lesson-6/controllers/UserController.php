@@ -4,13 +4,14 @@
 namespace app\controllers;
 
 use app\engine\Request;
+use app\engine\Session;
 use app\models\User;
 
 class UserController extends Controller
 {
     public function actionLogin() {
         if (isset($_POST['submit'])) {
-            $request = new Request();
+            $request = Request::getInstance();
             $login = $request->getParams()['login'];
             $pass = $request->getParams()['pass'];
             if (!User::auth($login, $pass)) {

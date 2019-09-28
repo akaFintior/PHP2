@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\engine\Db;
+use app\engine\Session;
 
 class User extends DbModel
 {
@@ -10,12 +11,14 @@ class User extends DbModel
     public $login;
     public $pass;
 
+
     public static function getTableName() {
         return 'users';
     }
     public static function makeHashAuth() {
         $hash = uniqid(rand(), true);
-        $id = $_SESSION['id'];
+        $session = Session::getInstance();
+        $id = $session->getSession()['id'];
         $sql = "UPDATE `users` SET `hash` = :hash WHERE `users`.`id` = :id";
         Db::getInstance()->execute($sql, ['hash' => $hash, 'id' => $id]);
         setcookie("hash", $hash, time() + 3600, "/");
@@ -24,27 +27,30 @@ class User extends DbModel
     public static function auth($login, $pass) {
         $user = static::getWhere('login', $login);
         if ($pass == $user->pass) {
-            $_SESSION['login'] = $login;
-            $_SESSION['id'] = $user->id;
+            $session = Session::getInstance();
+            $session->setSession('login', $login);
+            $session->setSession('id', $user->id);
             return true;
         }
         return false;
     }
 
     public static function isAuth() {
-        if (isset($_COOKIE["hash"])) {
-            $hash = $_COOKIE["hash"];
+        $session = Session::getInstance();
+        if (isset($session->getCookie()["hash"])) {
+            $hash = $session->getCookie()["hash"];
             $user = static::getWhere('hash', $hash);
-            $login = $user['login'];
+            $login = $user->login;
             if (!empty($login)) {
-                $_SESSION['login'] = $login;
+                $session->setSession('login', $login);
             }
         }
-        return isset($_SESSION['login']) ? true: false;
+        return isset($session->getSession()["login"]) ? true: false;
     }
 
     public static function getName() {
-        return static::isAuth() ? $_SESSION['login'] : "Guest";
+        $session = Session::getInstance();
+        return static::isAuth() ? $session->getSession()['login'] : "Guest";
     }
 
 }

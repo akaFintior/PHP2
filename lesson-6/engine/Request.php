@@ -4,6 +4,8 @@
 namespace app\engine;
 
 
+use app\traits\Tsingletone;
+
 class Request
 {
     protected $requestString;
@@ -17,6 +19,7 @@ class Request
         $this->requestString = $_SERVER['REQUEST_URI'];
         $this->parseRequest();
     }
+    use Tsingletone;
 
     private function parseRequest() {
         $this->method = $_SERVER['REQUEST_METHOD'];
