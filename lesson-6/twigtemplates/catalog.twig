@@ -1,0 +1,33 @@
+{% for product in catalog %}
+
+<a href="/product/card/?id={{ product.id }}"><h2>{{ product.name }}</h2></a>
+<p>{{ product.description }}</p>
+<p>Стоимость: {{ product.price }}</p>
+<button data-id="{{ product.id }}" class="buy">Купить</button>
+
+{% endfor %}
+
+
+<script>
+    let buttons = document.querySelectorAll('.buy');
+
+    buttons.forEach((elem) => {
+        elem.addEventListener('click', () => {
+            let id = elem.getAttribute('data-id');
+            (async () => {
+                const response = await fetch('/Api/AddBasket/', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        id: id
+                    }),
+                });
+                const answer = await response.json();
+                document.getElementById('count').innerText = answer.count;
+
+            })();
+        })
+    })
+</script>
