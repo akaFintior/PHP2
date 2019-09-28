@@ -17,7 +17,7 @@ class TwigRender implements IRenderer
      */
     public function __construct()
     {
-        $loader = new FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . "../twigtemplates");
+        $loader = new FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . "/../twigtemplates");
         $this->twig = new Environment($loader);
     }
 
