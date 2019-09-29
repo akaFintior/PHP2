@@ -32,12 +32,17 @@ class Basket extends DbModel
 
     public static function getBasket($session)
     {
-        $sql = "SELECT p.id id_prod, b.id id_basket, p.name, p.description, p.price FROM basket b,products p WHERE b.product_id=p.id AND session_id = :session";
+        $sql = "SELECT p.id id_prod, b.id id_basket, p.name, p.description, p.price, b.session_id FROM basket b,products p WHERE b.product_id=p.id AND session_id = :session";
         return Db::getInstance()->queryAll($sql, ['session' => $session]);
     }
     public static function deleteBasket($id, $session)
     {
         $sql = "DELETE FROM basket WHERE id = :id AND session_id = :session";
         return Db::getInstance()->execute($sql, ['id' => $id, 'session' => $session]);
+    }
+    public static function clearBasket($session)
+    {
+        $sql = "DELETE FROM basket WHERE session_id = :session";
+        return Db::getInstance()->execute($sql, ['session' => $session]);
     }
 }

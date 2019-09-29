@@ -32,4 +32,16 @@ class ApiController extends Controller
         echo json_encode($response);
         exit;
     }
+    public function actionClearBasket() {
+
+        Basket::clearBasket(session_id());
+
+        $response = [
+            'result' => 1,
+            'count' => 0
+        ];
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
 }
