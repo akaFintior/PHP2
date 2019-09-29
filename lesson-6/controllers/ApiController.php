@@ -10,7 +10,7 @@ class ApiController extends Controller
 {
     public function actionAddBasket() {
 
-        (new Basket(session_id(), (new Request())->getParams()['id']))->save();
+        (new Basket(session_id(), Request::getInstance()->getParams()['id']))->save();
 
         $response = [
             'result' => 1,
@@ -22,7 +22,7 @@ class ApiController extends Controller
     }
     public function actionDeleteBasket() {
 
-        Basket::deleteBasket(((new Request())->getParams()['id']), session_id());
+        Basket::deleteBasket((Request::getInstance()->getParams()['id']), session_id());
 
         $response = [
             'result' => 1,

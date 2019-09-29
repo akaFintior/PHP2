@@ -17,8 +17,7 @@ class User extends DbModel
     }
     public static function makeHashAuth() {
         $hash = uniqid(rand(), true);
-        $session = Session::getInstance();
-        $id = $session->getSession()['id'];
+        $id = Session::getInstance()->getSession()['id'];
         $sql = "UPDATE `users` SET `hash` = :hash WHERE `users`.`id` = :id";
         Db::getInstance()->execute($sql, ['hash' => $hash, 'id' => $id]);
         setcookie("hash", $hash, time() + 3600, "/");
@@ -49,8 +48,7 @@ class User extends DbModel
     }
 
     public static function getName() {
-        $session = Session::getInstance();
-        return static::isAuth() ? $session->getSession()['login'] : "Guest";
+        return static::isAuth() ? Session::getInstance()->getSession()['login'] : "Guest";
     }
 
 }
