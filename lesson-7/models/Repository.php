@@ -63,6 +63,7 @@ abstract class Repository extends Models
     }
     public function update(DataEntity $entity) {
         $tableName = $this->getTableName();
+        $allKeys = [];
         $setString = '';
         foreach ($entity as $key => $value) {
             if ($key !== 'id' && $key !== 'state' && $entity->state["$key"]) {

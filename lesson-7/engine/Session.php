@@ -8,29 +8,26 @@ use app\traits\Tsingletone;
 
 class Session
 {
-    protected $session;
-    protected $cookie;
-
     public function __construct()
     {
-        $this->session = $_SESSION;
-        $this->cookie = $_COOKIE;
+        session_start();
     }
 
     use Tsingletone;
 
     public function getSession()
     {
-        return $this->session;
+        return $_SESSION;
     }
 
     public function getCookie()
     {
-        return $this->cookie;
+        return $_COOKIE;
     }
 
     public function setSession($key, $value)
     {
         $_SESSION[$key] = $value;
     }
+
 }

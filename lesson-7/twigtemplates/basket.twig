@@ -3,11 +3,12 @@
     <p>Basket is empty!</p>
 {% else %}
     {% for item in products %}
-        <h2>{{ item.name }}</h2>
-        <p>Описание:{{ item.description }}</p>
-        <p>Цена:{{ item.price }}</p>
-
-        <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
+        <div id="{{ item.id_basket }}">
+            <h2>{{ item.name }}</h2>
+            <p>Описание:{{ item.description }}</p>
+            <p>Цена:{{ item.price }}</p>
+            <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
+        </div>
     {%  endfor %}
 
     <button class="clear">Очистить корзину</button>
@@ -29,7 +30,7 @@
                     });
                     const answer = await response.json();
                     document.getElementById('count').innerText = answer.count;
-                    location.reload();
+                    document.getElementById(id).remove();
 
                 })();
             })

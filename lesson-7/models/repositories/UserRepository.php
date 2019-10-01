@@ -15,6 +15,7 @@ class UserRepository extends Repository
         return 'users';
     }
 
+
     public function makeHashAuth()
     {
         $hash = uniqid(rand(), true);
@@ -35,16 +36,15 @@ class UserRepository extends Repository
     }
 
     public function isAuth() {
-        $session = $this->session;
-        if (isset($session->getCookie()["hash"])) {
-            $hash = $session->getCookie()["hash"];
+        if (isset($this->session->getCookie()["hash"])) {
+            $hash = $this->session->getCookie()["hash"];
             $user = $this->getWhere('hash', $hash);
             $login = $user->login;
             if (!empty($login)) {
-                $session->setSession('login', $login);
+                $this->session->setSession('login', $login);
             }
         }
-        return isset($session->getSession()["login"]) ? true: false;
+        return isset($this->session->getSession()["login"]) ? true: false;
     }
 
     public function getName() {

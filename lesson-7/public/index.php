@@ -1,7 +1,6 @@
 <?
-session_start();
 
-use app\engine\Render;
+use app\engine\Session;
 use app\engine\Request;
 use app\engine\TwigRender;
 
@@ -10,9 +9,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/../engine/Autoload.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/../vendor/Autoload.php";
 
-
 spl_autoload_register([new Autoload(), 'loadClass']);
 
+new Session();
 $request = new Request();
 
 $controllerName = $request->getControllerName() ?: 'product';
