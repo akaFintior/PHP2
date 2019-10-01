@@ -1,0 +1,53 @@
+<h2>Корзина</h2><hr>
+{% if products is empty %}
+    <p>Basket is empty!</p>
+{% else %}
+    {% for item in products %}
+        <h2>{{ item.name }}</h2>
+        <p>Описание:{{ item.description }}</p>
+        <p>Цена:{{ item.price }}</p>
+
+        <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
+    {%  endfor %}
+
+    <button class="clear">Очистить корзину</button>
+    <script>
+        let buttons = document.querySelectorAll('.delete');
+
+        buttons.forEach((elem) => {
+            elem.addEventListener('click', () => {
+                let id = elem.getAttribute('data-id');
+                (async () => {
+                    const response = await fetch('/Api/DeleteBasket/', {
+                        method: 'POST',
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        body: JSON.stringify({
+                            id: id
+                        }),
+                    });
+                    const answer = await response.json();
+                    document.getElementById('count').innerText = answer.count;
+                    location.reload();
+
+                })();
+            })
+        })
+    </script>
+    <script>
+        let clearButton = document.querySelector('.clear');
+
+            clearButton.addEventListener('click', () => {
+                (async () => {
+                    const response = await fetch('/Api/ClearBasket/', {
+                        method: 'POST',
+                    });
+                    const answer = await response.json();
+                    document.getElementById('count').innerText = answer.count;
+                    location.reload();
+
+                })();
+            })
+    </script>
+{% endif %}
