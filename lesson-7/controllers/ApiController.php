@@ -29,7 +29,8 @@ class ApiController extends Controller
 
         $response = [
             'result' => 1,
-            'count' => (new BasketRepository())->getCountWhere('session_id', session_id())
+            'count' => (new BasketRepository())->getCountWhere('session_id', session_id()),
+            'summ' => (new BasketRepository())->summBasket(session_id())
         ];
         header('Content-Type: application/json');
         echo json_encode($response);

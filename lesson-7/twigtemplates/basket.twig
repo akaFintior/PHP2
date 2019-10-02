@@ -10,7 +10,7 @@
             <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
         </div>
     {%  endfor %}
-
+    <p>Общая стоимость: <span id="summ">{{ summ }}</span></p>
     <button class="clear">Очистить корзину</button>
     <script>
         let buttons = document.querySelectorAll('.delete');
@@ -30,6 +30,7 @@
                     });
                     const answer = await response.json();
                     document.getElementById('count').innerText = answer.count;
+                    document.getElementById('summ').innerText = answer.summ;
                     document.getElementById(id).remove();
 
                 })();
@@ -45,7 +46,6 @@
                         method: 'POST',
                     });
                     const answer = await response.json();
-                    document.getElementById('count').innerText = answer.count;
                     location.reload();
 
                 })();

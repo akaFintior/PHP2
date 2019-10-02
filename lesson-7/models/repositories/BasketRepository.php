@@ -28,6 +28,10 @@ class BasketRepository extends Repository
         $sql = "DELETE FROM basket WHERE session_id = :session";
         return $this->db->execute($sql, ['session' => $session]);
     }
+    function summBasket($session) {
+        $sql = "SELECT SUM(p.price) as summ FROM basket b, products p WHERE b.product_id=p.id AND `session_id` =:session";
+        return $this->db->queryAll($sql, ['session' => $session])['summ'];
+    }
 
     public function getTableName()
     {
