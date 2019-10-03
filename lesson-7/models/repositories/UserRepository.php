@@ -27,7 +27,7 @@ class UserRepository extends Repository
 
     public function auth($login, $pass) {
         $user = $this->getWhere('login', $login);
-        if ($pass == $user->pass) {
+        if (password_verify($pass, $user->pass)) {
             $this->session->setSession('login', $login);
             $this->session->setSession('id', $user->id);
             return true;
@@ -54,5 +54,26 @@ class UserRepository extends Repository
     public function getEntityClass()
     {
         return User::class;
+    }
+
+    public function setLogin($login)
+    {
+        $this->login = $login;
+        $this->state['login'] = true;
+    }
+    public function setPass($pass)
+    {
+        $this->pass = password_hash($pass, PASSWORD_DEFAULT);
+        $this->state['pass'] = true;
+    }
+
+    public function getValue($valueOf)
+    {
+        switch ($valueOf) {
+            case 'login':
+                return $this->login;
+            case 'pass':
+                return $this->pass;
+        }
     }
 }

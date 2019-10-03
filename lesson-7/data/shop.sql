@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 28, 2019 at 01:24 PM
+-- Generation Time: Oct 03, 2019 at 11:57 AM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.7
 
@@ -88,9 +88,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
-(1, 'admin', '123', '19044909565d8f321e51aac0.93844818'),
-(2, 'user', '123', ''),
-(22, 'newName', '123', '');
+(1, 'admin', '$2y$10$R5/eWDXskZDAFMsoMuY.nuCE7nCHsTC9ssu2yuT2X05IJ/aeBfJOi', '5929339875d95b1275cc323.00036635'),
+(2, 'user', '$2y$10$hVeXtdBdT0DI8NKp6jJX3e7OP3Gnjx7zMMT.4PcBhqwLFp/BjvQqS', '20681558435d8f5ec8cae987.14685218'),
+(22, 'newName', '$2y$10$EQ9coH4e6Cb/zsf9sWtpO.Hgh.q2LUN4MtVMJ7efXXtzHXOqPaCo2', '2914846835d9363064f7ed0.14616420');
 
 --
 -- Indexes for dumped tables
@@ -122,7 +122,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -132,7 +132,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

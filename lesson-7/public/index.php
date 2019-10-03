@@ -2,6 +2,8 @@
 use app\engine\Session;
 use app\engine\Request;
 use app\engine\TwigRender;
+use app\models\repositories\UserRepository;
+use app\models\entities\User;
 
 try {
     include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
@@ -24,6 +26,15 @@ try {
     } else {
         echo "Не правильный контроллер";
     }
+
+//    $user = (new UserRepository())->getOne(22);
+//    $user->setPass(password_hash("123", PASSWORD_DEFAULT));
+//    (new UserRepository())->save($user);          // работает как задумывалось
+
+
+//    $user = new User('test', '123');             // вписывает две строчки
+//    (new UserRepository())->save($user);         // в бд с одинаковыми данными
+
 } catch (\Exception $e) {
     var_dump($e->getTrace());
 }

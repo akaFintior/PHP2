@@ -18,28 +18,9 @@ class User extends DataEntity
     public function __construct($login, $pass)
     {
         $this->login = $login;
-        $this->pass = $pass;
+        $this->pass = password_hash($pass, PASSWORD_DEFAULT);
     }
 
-    public function setLogin($login)
-    {
-        $this->login = $login;
-        $this->state['login'] = true;
-    }
-    public function setPass($pass)
-    {
-        $this->pass = $pass;
-        $this->state['pass'] = true;
-    }
 
-    public function getValue($valueOf)
-    {
-        switch ($valueOf) {
-            case 'login':
-                return $this->login;
-            case 'pass':
-                return $this->pass;
-        }
-    }
 
 }

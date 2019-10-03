@@ -39,7 +39,7 @@ abstract class Repository extends Models
         return $this->db->queryObject($sql, ["field"=>$value], static::class);
     }
 
-    public function insert(DataEntity $entity) {
+    public function insert($entity) {
         $params = [];
         $columns = [];
         $tableName = $this->getTableName();
@@ -56,12 +56,12 @@ abstract class Repository extends Models
         $entity->id = $this->db->lastInsertId();
     }
 
-    public function delete(DataEntity $entity) {
+    public function delete($entity) {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return $this->db->execute($sql, ['id' => $entity->id]);
     }
-    public function update(DataEntity $entity) {
+    public function update($entity) {
         $tableName = $this->getTableName();
         $allKeys = [];
         $setString = '';
@@ -81,7 +81,7 @@ abstract class Repository extends Models
         $this->db->execute($sql, $params);
     }
 
-    public function save(DataEntity $entity) {
+    public function save($entity) {
         if (is_null($entity->id)) {
             $this->insert($entity);
         } else {
