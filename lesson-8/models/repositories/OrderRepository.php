@@ -13,6 +13,11 @@ class OrderRepository extends Repository
         $sql = "UPDATE `orders` SET `is_processed`=:is_processed WHERE id=:id";
         return App::call()->db->execute($sql, ['is_processed' => 1, 'id' => $id]);
     }
+    public function getOrderSession($id)
+    {
+        $sql = "SELECT `session_id` FROM `orders` WHERE `id`=:id";
+        return App::call()->db->queryOne($sql, ['id' => $id]);
+    }
     public function getTableName()
     {
         return 'orders';
