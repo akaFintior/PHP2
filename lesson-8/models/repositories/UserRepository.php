@@ -3,7 +3,7 @@
 
 namespace app\models\repositories;
 
-
+use app\engine\App;
 use app\models\entities\User;
 use app\models\Repository;
 
@@ -19,36 +19,36 @@ class UserRepository extends Repository
     public function makeHashAuth()
     {
         $hash = uniqid(rand(), true);
-        $id = $this->session->getSession()['id'];
+        $id = App::call()->session->getSession()['id'];
         $sql = "UPDATE `users` SET `hash` = :hash WHERE `users`.`id` = :id";
-        $this->db->execute($sql, ['hash' => $hash, 'id' => $id]);
+        App::call()->db->execute($sql, ['hash' => $hash, 'id' => $id]);
         setcookie("hash", $hash, time() + 3600, "/");
     }
 
     public function auth($login, $pass) {
         $user = $this->getWhere('login', $login);
         if (password_verify($pass, $user->pass)) {
-            $this->session->setSession('login', $login);
-            $this->session->setSession('id', $user->id);
+            App::call()->session->setSession('login', $login);
+            App::call()->session->setSession('id', $user->id);
             return true;
         }
         return false;
     }
 
     public function isAuth() {
-        if (isset($this->session->getCookie()["hash"])) {
-            $hash = $this->session->getCookie()["hash"];
+        if (isset(App::call()->session->getCookie()["hash"])) {
+            $hash = App::call()->session->getCookie()["hash"];
             $user = $this->getWhere('hash', $hash);
             $login = $user->login;
             if (!empty($login)) {
-                $this->session->setSession('login', $login);
+                App::call()->session->setSession('login', $login);
             }
         }
-        return isset($this->session->getSession()["login"]) ? true: false;
+        return isset(App::call()->session->getSession()["login"]) ? true: false;
     }
 
     public function getName() {
-        return $this->isAuth() ? $this->session->getSession()['login'] : "Guest";
+        return $this->isAuth() ? App::call()->session->getSession()['login'] : "Guest";
     }
 
     public function getEntityClass()

@@ -3,16 +3,14 @@
 
 namespace app\controllers;
 
-
-use app\models\Basket;
-use app\models\repositories\BasketRepository;
+use app\engine\App;
 
 class BasketController extends Controller
 {
     public function actionIndex()
     {
         echo $this->render('basket', [
-            'products' => (new BasketRepository())->getBasket(session_id()),
-            'summ' => (new BasketRepository())->summBasket(session_id())]);
+            'products' => App::call()->basketRepository->getBasket(App::call()->session->getId()),
+            'summ' => App::call()->basketRepository->summBasket(App::call()->session->getId())]);
     }
 }

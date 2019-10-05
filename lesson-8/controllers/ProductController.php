@@ -2,10 +2,8 @@
 
 namespace app\controllers;
 
-use app\engine\Request;
-use app\models\Basket;
-use app\models\Product;
-use app\models\repositories\ProductRepository;
+use app\engine\App;
+
 
 class ProductController extends Controller
 {
@@ -16,14 +14,14 @@ class ProductController extends Controller
     }
 
     public function actionCatalog() {
-        $catalog = (new ProductRepository())->getAll();
+        $catalog = App::call()->productRepository->getAll();
         echo $this->render('catalog', ['catalog' => $catalog]);
     }
 
 
     public function actionCard() {
-        $id = $this->request->getParams()['id'];
-        $product = (new ProductRepository())->getOne($id);
+        $id = App::call()->request->getParams()['id'];
+        $product = App::call()->productRepository->getOne($id);
         echo $this->render('card', ['product' => $product]);
     }
 

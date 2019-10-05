@@ -12,8 +12,10 @@ class Session
     {
         session_start();
     }
-
-    use Tsingletone;
+    public function getId()
+    {
+        return session_id();
+    }
 
     public function getSession()
     {
@@ -28,6 +30,11 @@ class Session
     public function setSession($key, $value)
     {
         $_SESSION[$key] = $value;
+    }
+
+    public function sessionDestructor()
+    {
+        session_destroy();
     }
 
 }

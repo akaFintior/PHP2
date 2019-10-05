@@ -3,24 +3,20 @@
 
 namespace app\controllers;
 
-use app\engine\Request;
-use app\engine\Session;
-use app\interfaces\IRenderer;
-use app\models\repositories\UserRepository;
-use app\models\User;
+use app\engine\App;
 
 class UserController extends Controller
 {
 
     public function actionLogin() {
-        if (isset($this->request->getParams()['submit'])) {
-            $login = $this->request->getParams()['login'];
-            $pass = $this->request->getParams()['pass'];
-            if (!(new UserRepository())->auth($login, $pass)) {
+        if (isset(App::call()->request->getParams()['submit'])) {
+            $login = App::call()->request->getParams()['login'];
+            $pass = App::call()->request->getParams()['pass'];
+            if (!(App::call()->userRepository->auth($login, $pass))) {
                 Die("Не верный пароль!");
             } else {
-                if (isset($this->request->getParams()['save'])) {
-                    (new UserRepository())->makeHashAuth();
+                if (isset(App::call()->request->getParams()['save'])) {
+                    App::call()->userRepository->makeHashAuth();
                 }
             }
             header("Location: /");
@@ -28,7 +24,7 @@ class UserController extends Controller
         }
     }
     public function actionLogout() {
-        session_destroy();
+        App::call()->session->sessionDestructor();
         setcookie("hash", "", time() - 3600, "/");
         header("Location: /");
         exit();

@@ -3,21 +3,23 @@
 namespace app\controllers;
 
 
-use app\engine\Request;
-use app\interfaces\IRenderer;
+use app\engine\App;
 use app\models\entities\Basket;
-use app\models\repositories\BasketRepository;
+
 
 class ApiController extends Controller
 {
 
     public function actionAddBasket() {
 
-        (new BasketRepository())->save(new Basket(session_id(), $this->request->getParams()['id']));
+        App::call()->basketRepository->save(new Basket(
+            App::call()->session->getId(),
+            App::call()->request->getParams()['id'])
+        );
 
         $response = [
             'result' => 1,
-            'count' => (new BasketRepository())->getCountWhere('session_id', session_id())
+            'count' => App::call()->basketRepository->getCountWhere('session_id', App::call()->session->getId())
         ];
         header('Content-Type: application/json');
         echo json_encode($response);
@@ -25,12 +27,12 @@ class ApiController extends Controller
     }
     public function actionDeleteBasket() {
 
-        (new BasketRepository())->deleteBasket(($this->request->getParams()['id']), session_id());
+        App::call()->basketRepository->deleteBasket((App::call()->request->getParams()['id']), App::call()->session->getId());
 
         $response = [
             'result' => 1,
-            'count' => (new BasketRepository())->getCountWhere('session_id', session_id()),
-            'summ' => (new BasketRepository())->summBasket(session_id())
+            'count' => App::call()->basketRepository->getCountWhere('session_id', App::call()->session->getId()),
+            'summ' => App::call()->basketRepository->summBasket(App::call()->session->getId())
         ];
         header('Content-Type: application/json');
         echo json_encode($response);
@@ -38,7 +40,7 @@ class ApiController extends Controller
     }
     public function actionClearBasket() {
 
-        (new BasketRepository())->clearBasket(session_id());
+        App::call()->basketRepository->clearBasket(App::call()->session->getId());
 
         $response = [
             'result' => 1,
