@@ -37,4 +37,8 @@ class Session
         session_destroy();
     }
 
+    public function regenerate()
+    {
+        session_regenerate_id();
+    }
 }

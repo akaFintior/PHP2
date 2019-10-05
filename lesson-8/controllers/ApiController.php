@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\engine\App;
 use app\models\entities\Basket;
+use app\models\entities\Order;
 
 
 class ApiController extends Controller
@@ -45,6 +46,18 @@ class ApiController extends Controller
         $response = [
             'result' => 1,
             'count' => 0
+        ];
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+    public function actionProcessOrder() {
+
+        App::call()->orderRepository->process(App::call()->request->getParams()['id']);
+
+        $response = [
+            'result' => 1,
+            'processed' => 'Да'
         ];
         header('Content-Type: application/json');
         echo json_encode($response);

@@ -7,6 +7,7 @@ namespace app\engine;
 use app\models\repositories\BasketRepository;
 use app\models\repositories\ProductRepository;
 use app\models\repositories\UserRepository;
+use app\models\repositories\OrderRepository;
 use app\traits\Tsingletone;
 
 /**
@@ -14,6 +15,7 @@ use app\traits\Tsingletone;
  * @property Request $request
  * @property Session $session
  * @property BasketRepository $basketRepository
+ * @property OrderRepository $orderRepository
  * @property UserRepository $userRepository
  * @property ProductRepository $productRepository
  * @property Db $db

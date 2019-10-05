@@ -43,7 +43,8 @@ abstract class Controller
                 'auth' => App::call()->userRepository->isAuth(),
                 'username' => App::call()->userRepository->getName(),
                 'menu' => $this->renderTemplate('menu', [
-                    'count' => App::call()->basketRepository->getCountWhere('session_id', App::call()->session->getId())
+                    'count' => App::call()->basketRepository->getCountWhere('session_id', App::call()->session->getId()),
+                    'username' => App::call()->userRepository->getName()
                 ])
             ]);
         } else {
