@@ -1,14 +1,18 @@
-<h1>Заказчик: {{ order.name }}</h1>
-<h2>Номер телефона: {{ order.phone }}</h2>
-<h2>Адрес доставки: {{ order.adress }}</h2>
-{% for item in products %}
-    <div id="{{ item.id_basket }}">
-        <h3>{{ item.name }}</h3>
-        <p>Описание:{{ item.description }}</p>
-        <p>Цена:{{ item.price }}</p>
-    </div>
-{%  endfor %}
-<h3>Общая стоимость: {{ summ }}</h3>
-{% if (order.is_processed == 0) %}
-<h3 style="color:red;">Заказ ещё не обработан!</h3>
+{% if (username != 'admin') %}
+<p>Нет доступа</p>
+{% else %}
+    <h1>Заказчик: {{ order.name }}</h1>
+    <h2>Номер телефона: {{ order.phone }}</h2>
+    <h2>Адрес доставки: {{ order.adress }}</h2>
+    {% for item in products %}
+        <div id="{{ item.id_basket }}">
+            <h3>{{ item.name }}</h3>
+            <p>Описание:{{ item.description }}</p>
+            <p>Цена:{{ item.price }}</p>
+        </div>
+    {%  endfor %}
+    <h3>Общая стоимость: {{ summ }}</h3>
+    {% if (order.is_processed == 0) %}
+        <h3 style="color:red;">Заказ ещё не обработан!</h3>
+    {% endif %}
 {% endif %}

@@ -19,7 +19,7 @@ return [
             'host' => 'localhost',
             'login' => 'root',
             'password' => '',
-            'database' => 'shop',
+            'database' => 'webshop',
             'charset' => 'utf8'
         ],
         'request' => [

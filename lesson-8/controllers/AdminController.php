@@ -19,7 +19,8 @@ class AdminController extends Controller
         echo $this->render('order', [
             'order' => App::call()->orderRepository->getOne(App::call()->request->getParams()['id']),
             'products' => App::call()->basketRepository->getBasket(App::call()->orderRepository->getOrderSession(App::call()->request->getParams()['id'])["session_id"]),
-            'summ' => App::call()->basketRepository->summBasket(App::call()->orderRepository->getOrderSession(App::call()->request->getParams()['id'])["session_id"])
+            'summ' => App::call()->basketRepository->summBasket(App::call()->orderRepository->getOrderSession(App::call()->request->getParams()['id'])["session_id"]),
+            'username' => App::call()->userRepository->getName()
         ]);
     }
 }
