@@ -1,0 +1,66 @@
+<h2>Корзина</h2><hr>
+{% if products is empty %}
+    <p>Basket is empty!</p>
+{% else %}
+    {% for item in products %}
+        <div id="{{ item.id_basket }}">
+            <h2>{{ item.name }}</h2>
+            <p>Описание:{{ item.description }}</p>
+            <p>Цена:{{ item.price }}</p>
+            <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
+        </div>
+    {%  endfor %}
+    <p>Общая стоимость: <span id="summ">{{ summ }}</span></p>
+    <button id="clear">Очистить корзину</button>
+    <h2>Оформите заказ</h2>
+    <form action="/orders/placeOrder/" method="post" onsubmit="order()">
+        <input placeholder="Ваше имя" type="text" name="name">
+        <input placeholder="Телефон" type="text" name="phone">
+        <input placeholder="Адрес доставки" type="text" name="adress">
+        <input type="submit" name="send" value="Place Your Order">
+    </form>
+    <script>
+        let buttons = document.querySelectorAll('.delete');
+
+        buttons.forEach((elem) => {
+            elem.addEventListener('click', () => {
+                let id = elem.getAttribute('data-id');
+                (async () => {
+                    const response = await fetch('/Api/DeleteBasket/', {
+                        method: 'POST',
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        body: JSON.stringify({
+                            id: id
+                        }),
+                    });
+                    const answer = await response.json();
+                    document.getElementById('count').innerText = answer.count;
+                    document.getElementById('summ').innerText = answer.summ;
+                    document.getElementById(id).remove();
+
+                })();
+            })
+        })
+    </script>
+    <script>
+        let clearButton = document.querySelector('#clear');
+
+            clearButton.addEventListener('click', () => {
+                (async () => {
+                    const response = await fetch('/Api/ClearBasket/', {
+                        method: 'POST',
+                    });
+                    const answer = await response.json();
+                    location.reload();
+
+                })();
+            })
+    </script>
+    <script>
+        function order() {
+            alert("Order received!");
+        }
+    </script>
+{% endif %}
